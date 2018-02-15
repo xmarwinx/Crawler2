@@ -55,20 +55,20 @@ class QuotesSpider(scrapy.Spider):
                 'image' : quote.xpath('.//section[@class="image-section"]/a/img/@src').extract_first(),
             }
 
-        response.xpath('//li[@class=listclass"]/div[not(contains(@class,"divclass"))]/text()').extract()
+        #response.xpath('//li[@class=listclass"]/div[not(contains(@class,"divclass"))]/text()').extract()
 
         # Next button is same as back button need to pick right one...
 
-        # next_page_url = response.xpath('//div[@class="search-paging"]/span[@class="nav-icon"]/a/@href').extract_first()
-        next_page_url = response.xpath('//div[@class="search-paging"]/span[@class="nav-icon"]/a[contains(span, text(),"next")]/@href').extract_first()
+        next_page_url = response.xpath('//div[@class="search-paging"]/span[@class="nav-icon"]/a/@href').extract_first()
+        #next_page_url = response.xpath('//div[@class="search-paging"]/span[@class="nav-icon"]/a[contains(span, text(),"next")]/@href').extract_first()
         # next_page_url_next_or_not = response.xpath('//div[@class="search-paging"]/span[@class="nav-icon"]/a/span').extract_first()
 
         yield {'URLTOFOLLOW': next_page_url}
 
 
-        if "next" in next_page_url_next_or_not:
-            if next_page_url is not None:
-                yield response.follow(next_page_url, callback=self.parse)
+        #if "next" in next_page_url_next_or_not:
+        #    if next_page_url is not None:
+        #        yield response.follow(next_page_url, callback=self.parse)
         #else:
         #    next_page_url = response.xpath(
         #        '//div[@class="search-paging"]/span[@class="nav-icon"]/a/@href').extract_first()
