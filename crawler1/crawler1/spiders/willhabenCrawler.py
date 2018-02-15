@@ -1,3 +1,6 @@
+#1st Tests
+
+
 import scrapy
 
 
@@ -23,23 +26,23 @@ class QuotesSpider(scrapy.Spider):
             yield {
                
                 
-                #TITLE
-                #'title' : quote.css('div.header-w-brk span').extract(),
+                # TITLE
+                # 'title' : quote.css('div.header-w-brk span').extract(),
                 
-                #price
-                #'price' : quote.css('div.info span.info-2-price').extract(),
+                # price
+                # 'price' : quote.css('div.info span.info-2-price').extract(),
                 'price' : quote.css('div.info').extract(),
 
                 
-                #description
+                # description
                 'description' : quote.css('div.description::text').extract_first(),
                 
-                #adress
+                # adress
                 ##'adress' : quote.css('div.address-lg.w-brk-ln-1::text').extract(),
                 ##'date' : quote.css('div.bottom-2::text').extract(),
 
                 
-                #picture
+                # picture
             }
 
         #next_page = response.css('li.next a::attr("href")').extract_first()

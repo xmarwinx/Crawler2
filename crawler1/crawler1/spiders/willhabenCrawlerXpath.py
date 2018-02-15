@@ -4,7 +4,7 @@
 import scrapy
 import datetime
 import re
-#from crawler1.items import Crawler1Item
+from crawler1.items import Crawler1Item
 
 
 
@@ -48,12 +48,25 @@ class QuotesSpider(scrapy.Spider):
                 'description' : format(quote.xpath('.//div[@class="description"]/text()').extract_first()),
                 
                 # adress
-                'adress' : format2(quote.xpath('.//div[@class="address-lg w-brk-ln-1 "]/text()').extract_first()),
+                'address' : format2(quote.xpath('.//div[@class="address-lg w-brk-ln-1 "]/text()').extract_first()),
                 'date' : format(quote.xpath('.//div[@class="bottom-2"]/text()').extract_first()),
                 
                 # image
                 'image' : quote.xpath('.//section[@class="image-section"]/a/img/@src').extract_first(),
             }
+
+
+        for article in response.xpath('//article[@class="search-result-entry  "]'):
+
+            previewImage = Crawler1Item()
+            previewImage['image_urls'] = article.xpath('.//section[@class="image-section"]/a/img/@src').extract()
+
+
+            yield previewImage
+
+
+
+
 
         #response.xpath('//li[@class=listclass"]/div[not(contains(@class,"divclass"))]/text()').extract()
 
@@ -72,5 +85,3 @@ class QuotesSpider(scrapy.Spider):
         #else:
         #    next_page_url = response.xpath(
         #        '//div[@class="search-paging"]/span[@class="nav-icon"]/a/@href').extract_first()
-
-

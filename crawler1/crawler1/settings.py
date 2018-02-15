@@ -66,10 +66,10 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'crawler1.pipelines.Crawler1Pipeline': 300,
-    #'scrapy.pipelines.images.ImagesPipeline': 1,
+    'scrapy.pipelines.images.ImagesPipeline': 1,
 }
 
-IMAGES_STORE = 'home/marwin/eclipse-workspace/Crawler1/crawler1/crawler1/spiders/img'
+IMAGES_STORE = 'img'
 
 
 # Enable and configure the AutoThrottle extension (disabled by default)

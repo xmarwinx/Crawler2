@@ -6,18 +6,17 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy import Item, Field
 
 
-class Crawler1Item(scrapy.Item):
+class Crawler1Item(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    """
-    title = scrapy.Field()
-    description = scrapy.Field()
-    adress = scrapy.Field()
+
+    title = Field()
+    title_link = Field()
+    description = Field()
+    address = scrapy.Field()
     date = scrapy.Field()
-    image_urls= scrapy.Field()
-    images= scrapy.Field()
-    """ 
-    
-    pass
+    image_urls = Field()
+    images = Field()
