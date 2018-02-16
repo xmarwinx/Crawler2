@@ -65,3 +65,6 @@ class QuotesSpider(scrapy.Spider):
 
 
         yield searchResult_detail_view_item
+
+
+
