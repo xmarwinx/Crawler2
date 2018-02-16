@@ -2,7 +2,7 @@
 
 import scrapy
 import datetime
-from crawler1.items import Crawler1Item
+from crawler1.items import Crawler1Item, Crawler1_detail_view_Item
 from lxml.html._diffcommand import description
 import re
 
@@ -46,20 +46,22 @@ class QuotesSpider(scrapy.Spider):
             if detail_view_url is not None:
                 yield response.follow(detail_view_url, self.parse_detail_view)
 
+
             yield searchResult_item
 
         """
         # There are way too many results so better dont enable this
         next_page_url = response.xpath('//div[@class="search-paging"]/span[@class="nav-icon"]/a/@href').extract()
-
+  
         next_page = str(next_page_url[1])
         if next_page is not None:
             yield response.follow(next_page, callback=self.parse)
         """
 
     def parse_detail_view(self, response):
-        searchResult_item = Crawler1Item()
-        searchResult_item['detail_description'] = response.xpath('.//div[@class="description"]/p/text()').extract_first(default='Error: No description found')
+        searchResult_detail_view_item = Crawler1_detail_view_Item()
+        searchResult_detail_view_item['detail_description'] = response.xpath('.//div[@class="description"]/p/text()').extract_first(default='Error: No description found')
+        searchResult_detail_view_item['name'] = response.xpath('.//div[@class="description"]/p/text()').extract_first()
 
-        yield searchResult_item
 
+        yield searchResult_detail_view_item

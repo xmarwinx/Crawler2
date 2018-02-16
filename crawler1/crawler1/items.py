@@ -23,3 +23,12 @@ class Crawler1Item(Item):
     date = scrapy.Field()
     image_urls = Field()
     images = Field()
+
+class Crawler1_detail_view_Item(Item):
+    telephone_number = Field()
+    detail_description = Field()
+    name = Field()
+    address = Field()
+    detail_informations = Field()
+    image_urls = Field()
+    images = Field()
