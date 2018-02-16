@@ -13,6 +13,9 @@ class Crawler1Item(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
 
+    telephone_number = Field()
+    detail_description = Field()
+
     title = Field()
     title_link = Field()
     description = Field()

@@ -29,6 +29,7 @@ class QuotesSpider(scrapy.Spider):
 
         for article in response.xpath('//article[@class="search-result-entry  "]'):
 
+            # getting the data from the overview page
             searchResult_item = Crawler1Item()
             #searchResult_item['image_urls'] = article.xpath('.//section[@class="image-section"]/a/img/@src').extract()
             #searchResult_item['description'] = format(article.xpath('.//div[@class="description"]/text()').extract_first())
@@ -37,6 +38,13 @@ class QuotesSpider(scrapy.Spider):
             #searchResult_item['address'] = format2(article.xpath('.//div[@class="address-lg w-brk-ln-1 "]/text()').extract_first())
             #searchResult_item['date'] = format(article.xpath('.//div[@class="bottom-2"]/text()').extract_first())
 
+
+            # going to each detail view
+            detail_view_url =  article.xpath('.//div[@class="header w-brk"]/a/@href').extract_first()
+            print ("detail_view_url:", detail_view_url)
+
+            if detail_view_url is not None:
+                yield response.follow(detail_view_url, self.parse_detail_view)
 
             yield searchResult_item
 
@@ -48,3 +56,10 @@ class QuotesSpider(scrapy.Spider):
         if next_page is not None:
             yield response.follow(next_page, callback=self.parse)
         """
+
+    def parse_detail_view(self, response):
+        searchResult_item = Crawler1Item()
+        searchResult_item['detail_description'] = response.xpath('.//div[@class="description"]/p/text()').extract_first(default='Error: No description found')
+
+        yield searchResult_item
+
